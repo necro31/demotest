@@ -1,4 +1,4 @@
-FROM gradle:8.3.0-jdk17 as builder
+FROM gradle:8.2.1-jdk17 as builder
 WORKDIR /app
 ADD gradle ./gradle
 ADD src ./src
