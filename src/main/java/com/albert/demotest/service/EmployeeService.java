@@ -5,6 +5,7 @@ import com.albert.demotest.dto.EmployeeDTO;
 import com.albert.demotest.entity.MsEmployee;
 import com.albert.demotest.enums.Grade;
 import com.albert.demotest.repository.MsEmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
     private final MsEmployeeRepository msEmployeeRepository;
 
     // Dependency Injection
-    @Autowired
-    public EmployeeService(MsEmployeeRepository msEmployeeRepository) {
-        this.msEmployeeRepository = msEmployeeRepository;
-    }
+//    @Autowired
+//    public EmployeeService(MsEmployeeRepository msEmployeeRepository) {
+//        this.msEmployeeRepository = msEmployeeRepository;
+//    }
 
     public EmployeeDTO createNewEmployee(CreateOrUpdateEmployee createOrUpdateEmployee) {
         // asumsi nama employee boleh duplicate
