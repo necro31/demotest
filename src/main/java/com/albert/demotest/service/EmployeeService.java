@@ -6,9 +6,9 @@ import com.albert.demotest.entity.MsEmployee;
 import com.albert.demotest.enums.Grade;
 import com.albert.demotest.repository.MsEmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +17,7 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final MsEmployeeRepository msEmployeeRepository;
 
-    // Dependency Injection
-//    @Autowired
-//    public EmployeeService(MsEmployeeRepository msEmployeeRepository) {
-//        this.msEmployeeRepository = msEmployeeRepository;
-//    }
+
 
     public EmployeeDTO createNewEmployee(CreateOrUpdateEmployee createOrUpdateEmployee) {
         // asumsi nama employee boleh duplicate
@@ -48,6 +44,17 @@ public class EmployeeService {
         );
 
         return buildData(existingEmployee);
+    }
+
+    public void deleteBulkData(List<Long> ids)
+    {
+      final List <MsEmployee> existingEmployee = msEmployeeRepository.findByDeletedAtIsNullAndIdIn(ids);
+
+      for (MsEmployee employee : existingEmployee) {
+        employee.setDeletedAt(Instant.now());
+      }
+
+      msEmployeeRepository.saveAll(existingEmployee);
     }
 
     public List<EmployeeDTO> getAllEmployee() {

@@ -12,4 +12,6 @@ public interface MsEmployeeRepository extends JpaRepository<MsEmployee, Long> {
     Optional<MsEmployee> findByDeletedAtIsNullAndId(Long id);
 
     List<MsEmployee> findAllByDeletedAtIsNull();
+
+    List<MsEmployee> findByDeletedAtIsNullAndIdIn(List<Long>ids);
 }

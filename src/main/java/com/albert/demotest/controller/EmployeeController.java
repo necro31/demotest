@@ -36,4 +36,11 @@ public class EmployeeController {
         return employeeService.getAllEmployee();
     }
 
+    @DeleteMapping("/delete-bulk")
+    public void deleteBulkData (@RequestBody List<Long> ids )
+    {
+        employeeService.deleteBulkData(ids);
+    }
+
+
 }
